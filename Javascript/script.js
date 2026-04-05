@@ -106,6 +106,8 @@ function handleDrop(e) {
 
 window.onload = () => {
     document.querySelectorAll('.file-card').forEach(card => {
+        card.ondragstart = () => false;
+
         card.addEventListener('pointerdown', (e) => {
             if (card.parentElement.classList.contains('folder-inner')) return;
 
@@ -171,6 +173,8 @@ let cardInitialLeft = 0, cardInitialTop = 0;
 
 // 2. Drag Start
 document.querySelectorAll('.draggable-work').forEach(work => {
+    work.ondragstart = () => false;
+
     work.addEventListener('pointerdown', (e) => {
         work.setPointerCapture(e.pointerId);
 
@@ -260,9 +264,12 @@ function checkMatchAndDrop(card, folder) {
     if (correctMatches[iconId] === folderId) {
         const innerBasket = folder.querySelector('.folder-inner');
         innerBasket.appendChild(card);
+
         card.style.position = "static";
         card.style.transform = "scale(0.6)";
         card.style.cursor = "default";
+        card.style.background = "transparent";
+        card.style.boxShadow = "none";
         
         const iconsInFolder = innerBasket.querySelectorAll('.file-card').length;
         const targets = { 'folder-vanessa': 3, 'folder-kelsey': 2, 'folder-anna': 3 };
