@@ -251,31 +251,40 @@ document.addEventListener('pointerup', (e) => {
     }
 });
 
-// 5. 폴더 매칭 함수 (모바일용 필수 로직)
 function checkMatchAndDrop(card, folder) {
+    // Get the ID of the dragged icon and the target folder
     const iconId = card.querySelector('img').id;
     const folderId = folder.id;
+
+    // Define the correct folder destination for each icon
     const correctMatches = {
         'icon-blood': 'folder-vanessa', 'icon-belt': 'folder-vanessa', 'icon-porcupine': 'folder-vanessa',
         'icon-skull': 'folder-kelsey', 'icon-shovel': 'folder-kelsey',
         'icon-nowater': 'folder-anna', 'icon-nopower': 'folder-anna', 'icon-camera': 'folder-anna'
     };
 
+    // Check if the dropped icon matches the target folder
     if (correctMatches[iconId] === folderId) {
+        // Append the dropped card to the folder's inner container
         const innerBasket = folder.querySelector('.folder-inner');
         innerBasket.appendChild(card);
 
+        // Force relative positioning to keep the icon inside the folder layout
         card.style.setProperty('position', 'relative', 'important');
         card.style.left = 'auto';
         card.style.top = 'auto';
-        
+
+        // Adjust styles for the docked state (scale down, remove background/shadow)
         card.style.transform = "scale(0.6)";
         card.style.cursor = "default";
         card.style.background = "transparent";
         card.style.boxShadow = "none";
         
+        // Check the current count of icons inside this specific folder
         const iconsInFolder = innerBasket.querySelectorAll('.file-card').length;
         const targets = { 'folder-vanessa': 3, 'folder-kelsey': 2, 'folder-anna': 3 };
+
+        // Open the modal if the folder has collected all required icons
         if (iconsInFolder === targets[folderId]) {
             setTimeout(() => openModal(folderId), 500);
         }
