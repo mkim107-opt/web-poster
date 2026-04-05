@@ -131,6 +131,11 @@ body{
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border: none;
+
+    touch-action: none;         
+    -webkit-user-select: none;  
+    user-select: none;
+    -webkit-user-drag: none;
 }
 .file-card:hover {
     transform: translateY(-8px) scale(1.05) rotate(2deg); 
@@ -325,11 +330,13 @@ body{
     cursor: grab;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 5px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    touch-action: none;       
-    user-select: none;       
-    -webkit-user-drag: none;    
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);     
     will-change: transform;
+
+    touch-action: none;         
+    -webkit-user-select: none;  
+    user-select: none;
+    -webkit-user-drag: none;
 }
 .draggable-work:active {
     cursor: grabbing;
@@ -406,7 +413,6 @@ body{
         overflow: hidden;
     }
     .title {
-        color: #222;
         font-size: 1.4rem;
         margin-top: 0;
         margin-bottom: 30px;

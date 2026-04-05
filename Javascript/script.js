@@ -155,9 +155,11 @@ const draggables = document.querySelectorAll('.draggable-work');
 let currentTarget = null; 
 let startX = 0, startY = 0;
 
-// 2. Drag Start (mousedown)
+// 2. Drag Start
 document.querySelectorAll('.draggable-work').forEach(work => {
-    work.addEventListener('mousedown', (e) => {
+    work.addEventListener('pointerdown', (e) => {
+        work.setPointerCapture(e.pointerId);
+
         currentTarget = work;
         startX = e.clientX;
         startY = e.clientY;
@@ -175,8 +177,8 @@ document.querySelectorAll('.draggable-work').forEach(work => {
     });
 });
 
-// 3. Dragging (mousemove)
-document.addEventListener('mousemove', (e) => {
+// 3. Dragging 
+document.addEventListener('pointermove', (e) => {
     if (!currentTarget) return;
 
     // Calculate distance from the starting point
@@ -191,8 +193,8 @@ document.addEventListener('mousemove', (e) => {
     });
 });
 
-// 4. Drag End (mouseup)
-document.addEventListener('mouseup', () => {
+// 4. Drag End
+document.addEventListener('pointerup', () => {
     if (!currentTarget) return;
 
     const target = currentTarget; 
