@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimental Form II : Interaction</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="poster-container">
+        <h1 class="title">OCAD Arts & Science Research Talks</h1>
+        <div class="folder-column">
+            <div class="folder-group">
+                <div class="folder blue-folder" id="folder-vanessa">
+                    <div class="folder-inner"></div>
+                </div>
+                <p class="label">Vanessa Dion Fletcher_<br>Body / Identity / Material</p>
+            </div>
+            <div class="folder-group">
+                <div class="folder yellow-folder" id="folder-kelsey">
+                    <div class="folder-inner"></div>
+                </div>
+                <p class="label">Kelsey Pugh_<br>Fossil / Evolution / Reconstruction</p>
+            </div>
+            <div class="folder-group">
+                <div class="folder pink-folder" id="folder-anna">
+                    <div class="folder-inner"></div>
+                </div>
+                <p class="label">Anna Stielau_<br>Photography / Infrastructural art / South Africa</p>
+            </div>
+
+            <div class="icon-area">
+                <div class="file-card blue-file" id="card-porcupine" draggable="true">
+                    <img src="Images/porcupine.png" class="draggable-icon" id="icon-porcupine">
+                </div>
+                <div class="file-card blue-file" id="card-blood" draggable="true">
+                    <img src="Images/blood.png" class="draggable-icon" id="icon-blood">
+                </div>
+                <div class="file-card blue-file" id="card-belt" draggable="true">
+                    <img src="Images/belt.png" class="draggable-icon" id="icon-belt">
+                </div>
+
+                <div class="file-card yellow-file" id="card-skull" draggable="true">
+                    <img src="Images/skull.png" class="draggable-icon" id="icon-skull">
+                </div>
+                <div class="file-card yellow-file" id="card-shovel" draggable="true">
+                    <img src="Images/shovel.png" class="draggable-icon" id="icon-shovel">
+                </div>
+
+                <div class="file-card pink-file" id="card-camera" draggable="true">
+                    <img src="Images/camera.png" class="draggable-icon" id="icon-camera">
+                </div>
+                <div class="file-card pink-file" id="card-nopower" draggable="true">
+                    <img src="Images/nopower.png" class="draggable-icon" id="icon-nopower">
+                </div>
+                <div class="file-card pink-file" id="card-nowater" draggable="true">
+                    <img src="Images/nowater.png" class="draggable-icon" id="icon-nowater">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container">
+        <div class="modal-content-blue" id="content-vanessa">
+            <button class="close-modal">&times;</button>
+            <h1 class="modal-title">Vanessa Dion Fletcher_</h1>
+
+            <div class="photo-container">
+                <img src="Images/vanessa.png" alt="vanessa profile" class="static-profile">
+
+                <img src="Images/belt.png" alt="dion-work-1" class="draggable-work">
+                <img src="Images/brown.png" alt="dion-work-2" class="draggable-work">
+                <img src="Images/pink.png" alt="dion-work-3" class="draggable-work">
+            </div>
+
+            <div class="modal-bio-section">
+                <p class="bio-text">
+                    Vanessa Dion Fletcher is a Lenáape and Potawatomi neurodiverse artist. Utilizing symbolic materials such as porcupine quills, Wampum belts, and menstrual blood, she reveals the physical and cultural complexities that define the body.
+                </p>
+                <p class="bio-text">
+                    Spanning performance, textiles, and video, her work challenges the colonialism and ableism of language. By centering the experiences of an Indigenous feminist body and a neurodiverse mind, she reshapes the fragmented structures of communication into profound visual art.
+                </p>
+            </div>
+        </div>
+
+        <div class="modal-content-yellow" id="content-kelsey">
+            <button class="close-modal">&times;</button>
+            <h1 class="modal-title">Kelsey Pugh_</h1>
+
+            <div class="photo-container">
+                <img src="Images/kelsey.png" alt="kelsey profile" class="static-profile">
+
+                <div class="item-box">
+                    <div class="tooltip-wrap" aria-label="Fig 1. Left metacarpals of selected cercopithecids in approximate articulated position, dorsal and proximal views. A. Colobus guereza, female; B. Nasalis larvatus male; C. Cercopithecoides williamsi (KNM-ER 4420) male; D. Papio hamadryas anubis male (photographically reversed).">
+                        <img src="Images/hand.png" alt="pugh-work-1" class="draggable-work">
+                    </div>
+                </div>
+                <div class="item-box">
+                    <div class="tooltip-wrap" aria-label="Fig. 2. Pronograde versus orthograde body plan. (A) Macaque (above) and chimpanzee (below) in typical postures, showing general differences between pronograde and orthograde body plan characteristics. In comparison to a pronograde monkey, the modern hominoid orthograde body plan is characterized by the lack of an external tail (the coccyx being its vestigial remnant), a ribcage that is mediolaterally broad and dorsoventrally shallow, dorsally placed scapulae that are cranially elevated and oriented, a shorter lower back, and long iliac blades. Modern hominoids have higher ranges of joint mobility, such as the full elbow extension shown here, facilitated by a short ulnar olecranon process. The inset further shows differences in lumbar vertebral anatomy, including more dorsally situated and oriented transverse processes in orthograde hominoids. (B) Representatives of each extant hominoid lineage (left column) show different postural variations associated with an orthograde body plan. The orthograde body plan facilitates bipedal">
+                        <img src="Images/body.png" alt="pugh-work-2" class="draggable-work">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-bio-section">
+                <p class="bio-text">
+                    Kelsey Pugh is a paleoanthropologist and Assistant Professor at OCAD University, where she investigates the evolutionary origins of the human body. By bridging the gap between ancestral primate fossil records and cutting-edge 3D virtual reconstruction technology, she works to visualize the "missing links" of human evolution.
+                </p>
+                <p class="bio-text">
+                    She analyzes the anatomical traces etched into fossils to trace the origins of bipedalism and the structural transformation of the body. Exploring the evolutionary knowledge embedded in prehistoric materials, she addresses the complex lineage and scientific implications of how the biological human body came to be defined in its current form.
+                </p>
+            </div>
+        </div>
+
+        <div class="modal-content-pink" id="content-anna">
+            <button class="close-modal">&times;</button>
+            <h1 class="modal-title">Anna Stielau_</h1>
+
+            <div class="photo-container"><img src="Images/anna.png" alt="anna profile" class="static-profile"></div>
+
+            <div class="modal-bio-section">
+                <p class="bio-text">
+                    Dr. Anna Stielau is an Assistant Professor of Art History and Visual Culture at OCAD University, specializing in how contemporary African artists utilize media and technology to reimagine the world. She redefines photography as an "infrastructural art" dependent on light, power, and water. Her research explores how art navigates and thinks through resource constraints, shifting our focus from the final image to the underlying systems that make its existence possible.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="Javascript/script.js"></script>
+</body>
+
+
+</html>
