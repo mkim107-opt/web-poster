@@ -106,17 +106,27 @@ function handleDrop(e) {
 
 window.onload = () => {
     document.querySelectorAll('.file-card').forEach(card => {
-        card.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData("text", e.target.id);
+        card.addEventListener('pointerdown', (e) => {
+            if (card.parentElement.classList.contains('folder-inner')) return;
+
+            card.setPointerCapture(e.pointerId); 
+            activeCard = card;
+
+            cardStartX = e.clientX;
+            cardStartY = e.clientY;
+            cardInitialLeft = card.offsetLeft;
+            cardInitialTop = card.offsetTop;
+
+            card.style.transition = 'none';
+            card.style.zIndex = '1000';
+            card.style.cursor = 'grabbing';
         });
     });
 
     // Enable dropping for folders
     document.querySelectorAll('.folder').forEach(folder => {
-        folder.addEventListener('dragover', allowDrop); 
-        folder.addEventListener('drop', handleDrop);
         folder.addEventListener('click', () => {
-            const iconsInFolder = folder.querySelectorAll('img').length;
+            const iconsInFolder = folder.querySelectorAll('.file-card').length;
             const folderId = folder.id;
             const targets = { 'folder-vanessa': 3, 'folder-kelsey': 2, 'folder-anna': 3 };
 
@@ -141,9 +151,9 @@ window.onload = () => {
             const kelsey = document.getElementById('content-kelsey');
             const anna = document.getElementById('content-anna');
 
-            if (vanessaContent) vanessaContent.style.display = 'none';
-            if (kelseyContent) kelseyContent.style.display = 'none';
-            if (annaContent) annaContent.style.display = 'none';
+            if (vanessa) vanessa.style.display = 'none';
+            if (kelsey) kelsey.style.display = 'none';
+            if (anna) anna.style.display = 'none';
         });
     });
 }
@@ -153,7 +163,11 @@ const draggables = document.querySelectorAll('.draggable-work');
 
 // 1. Initial settings: tracking target and starting coordinates
 let currentTarget = null; 
+let activeCard = null; 
+
 let startX = 0, startY = 0;
+let cardStartX = 0, cardStartY = 0;
+let cardInitialLeft = 0, cardInitialTop = 0;
 
 // 2. Drag Start
 document.querySelectorAll('.draggable-work').forEach(work => {
@@ -179,40 +193,84 @@ document.querySelectorAll('.draggable-work').forEach(work => {
 
 // 3. Dragging 
 document.addEventListener('pointermove', (e) => {
-    if (!currentTarget) return;
+    if (!currentTarget && !activeCard) return;
 
-    // Calculate distance from the starting point
-    const x = e.clientX - startX;
-    const y = e.clientY - startY;
-    
-    // Use requestAnimationFrame for smoother performance
     requestAnimationFrame(() => {
-        if (currentTarget) {
+       if (currentTarget) {
+            const x = e.clientX - startX;
+            const y = e.clientY - startY;
             currentTarget.style.transform = `translate(${x}px, ${y}px)`;
+        }
+        if (activeCard) {
+            const dx = e.clientX - cardStartX; 
+            const dy = e.clientY - cardStartY;
+            activeCard.style.left = `${cardInitialLeft + dx}px`;
+            activeCard.style.top = `${cardInitialTop + dy}px`;
         }
     });
 });
 
 // 4. Drag End
-document.addEventListener('pointerup', () => {
-    if (!currentTarget) return;
+document.addEventListener('pointerup', (e) => {
+    if (activeCard) {
+        const card = activeCard; 
+        activeCard = null;  
 
-    const target = currentTarget; 
-    currentTarget = null;       
+        const elements = document.elementsFromPoint(e.clientX, e.clientY);
+        const folder = elements.find(el => el.classList.contains('folder'));
 
-    // Re-enable smooth transition and move back to original position
-    target.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    target.style.cursor = 'grab';
-
-    target.style.transform = `translate(0px, 0px)`;
-    
-    // Reset z-index to hide behind the profile after the animation finishes
-    setTimeout(() => {
-        const parentBox = target.closest('.item-box');
-        if (parentBox) {
-            parentBox.style.zIndex = "15"; 
-        } else {
-            target.style.zIndex = "5";
+        if (folder) {
+            checkMatchAndDrop(card, folder);
+        }else {
+            card.style.zIndex = "5";
+            card.style.cursor = 'grab';
         }
-    }, 600);
+    }
+
+    if (currentTarget) {
+        const target = currentTarget;
+        currentTarget = null;
+
+        target.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        target.style.cursor = 'grab';
+        target.style.transform = `translate(0px, 0px)`;
+
+        // Reset z-index to hide behind the profile after the animation finishes
+        setTimeout(() => {
+            const parentBox = target.closest('.item-box');
+            if (parentBox) {
+                parentBox.style.zIndex = "15"; 
+            } else {
+                target.style.zIndex = "5";
+            }
+        }, 600);
+    }
 });
+
+// 5. 폴더 매칭 함수 (모바일용 필수 로직)
+function checkMatchAndDrop(card, folder) {
+    const iconId = card.querySelector('img').id;
+    const folderId = folder.id;
+    const correctMatches = {
+        'icon-blood': 'folder-vanessa', 'icon-belt': 'folder-vanessa', 'icon-porcupine': 'folder-vanessa',
+        'icon-skull': 'folder-kelsey', 'icon-shovel': 'folder-kelsey',
+        'icon-nowater': 'folder-anna', 'icon-nopower': 'folder-anna', 'icon-camera': 'folder-anna'
+    };
+
+    if (correctMatches[iconId] === folderId) {
+        const innerBasket = folder.querySelector('.folder-inner');
+        innerBasket.appendChild(card);
+        card.style.position = "static";
+        card.style.transform = "scale(0.6)";
+        card.style.cursor = "default";
+        
+        const iconsInFolder = innerBasket.querySelectorAll('.file-card').length;
+        const targets = { 'folder-vanessa': 3, 'folder-kelsey': 2, 'folder-anna': 3 };
+        if (iconsInFolder === targets[folderId]) {
+            setTimeout(() => openModal(folderId), 500);
+        }
+    } else {
+        folder.classList.add('shake');
+        setTimeout(() => folder.classList.remove('shake'), 500);
+    }
+}
