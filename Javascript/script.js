@@ -265,7 +265,10 @@ function checkMatchAndDrop(card, folder) {
         const innerBasket = folder.querySelector('.folder-inner');
         innerBasket.appendChild(card);
 
-        card.style.position = "static";
+        card.style.setProperty('position', 'relative', 'important');
+        card.style.left = 'auto';
+        card.style.top = 'auto';
+        
         card.style.transform = "scale(0.6)";
         card.style.cursor = "default";
         card.style.background = "transparent";
