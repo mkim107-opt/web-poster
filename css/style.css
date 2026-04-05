@@ -22,7 +22,7 @@ body{
     font-size: 2.5rem;
     font-weight: normal;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .folder-column { /* Parent container for the folders */
@@ -61,10 +61,13 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
+
     overflow: hidden; 
     border-radius: inherit; 
+
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-content: space-evenly;
     padding: 10px;
     box-sizing: border-box;
@@ -421,7 +424,7 @@ body{
     }
     .folder-column {
         flex-direction: column;
-        gap: 5px; 
+        gap: 10px; 
         justify-content: center;
         flex: 1; 
         z-index: 15;
