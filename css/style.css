@@ -1,24 +1,20 @@
 body{
-    background-color: #023cf9; 
+    background-color: #023cf9;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     overflow: hidden;
-    padding: 0;
 }
 
 .poster-container {
     width: 100%;
     max-width: 1200px;
-    height: 95vh;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    justify-items: center;
-    align-items: center;
+    margin: 0;
+    padding: 40px;
     box-sizing: border-box;
 }
 
@@ -26,47 +22,53 @@ body{
     font-size: 2.5rem;
     font-weight: normal;
     text-align: center;
-    margin: 2vh 0;
+    margin-bottom: 60px;
+
 }
 
 .folder-column { /* Parent container for the folders */
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
-    gap: 0.5vh;
+    gap: 5px;
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
 }
+
+
 
 .folder-group { /* Individual folder group (Folder + Label) */
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0;
+    margin-bottom: 20px;
 }
+
+
 
 /* === Folder body === */
 .folder {
     position: relative;
-    width: 180px; 
-    height: 110px;
+    width: 220px;
+    height: 140px;
     border-radius: 0 12px 12px 12px; /* keep the top-left corner square and round the rest */
     display: flex;
     justify-content: center;
     align-items: center;
+    color: black;
+    font-weight: bold;
+    font-size: 1.3rem;
     cursor: pointer;
 }
+
 .folder-inner {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-
-    overflow: hidden; 
-    border-radius: inherit; 
-
+    overflow: hidden;
+    border-radius: inherit;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -74,27 +76,29 @@ body{
     padding: 10px;
     box-sizing: border-box;
 }
-.folder::before { 
-    content: '';
-    position: absolute;
-    bottom: 99%; 
-    left: 0;
-    width: 45px; 
-    height: 22px; 
-    background-color: inherit; 
-    border-radius: 10px 0 0 0; 
-}
-.folder::after { 
+
+.folder::before {
     content: '';
     position: absolute;
     bottom: 99%;
-    left: 38px; 
-    width: 40px;
-    height: 22px;
+    left: 0;
+    width: 55px;
+    height: 28px;
     background-color: inherit;
-    border-radius: 10px 10px 0 0; 
-    transform: skewX(35deg); 
-    transform-origin: bottom left; 
+    border-radius: 10px 0 0 0;
+}
+
+.folder::after {
+    content: '';
+    position: absolute;
+    bottom: 99%;
+    left: 45px;
+    width: 45px;
+    height: 28px;
+    background-color: inherit;
+    border-radius: 10px 10px 0 0;
+    transform: skewX(35deg);
+    transform-origin: bottom left;
 }
 
 .blue-folder { background-color: #87CEFA; }
@@ -105,7 +109,7 @@ body{
 .label {
     width: 220px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 15px;
     line-height: 1.4;
     font-weight: bold;
 }
@@ -120,6 +124,8 @@ body{
     pointer-events: none;
     z-index: 5;
 }
+
+
 
 /* Base style for the 'File' look */
 .file-card {
@@ -136,20 +142,21 @@ body{
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border: none;
-
-    touch-action: none;         
-    -webkit-user-select: none;  
+    touch-action: none;
+    -webkit-user-select: none;
     user-select: none;
     -webkit-user-drag: none;
 }
+
 .file-card:hover {
-    transform: translateY(-8px) scale(1.05) rotate(2deg); 
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-8px) scale(1.05) rotate(2deg);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
     filter: brightness(1.1);
 }
+
 .file-card:active {
     cursor: grabbing;
-    transform: translateY(-4px) scale(0.95); 
+    transform: translateY(-4px) scale(0.95);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -168,25 +175,26 @@ body{
     width: 95%;
     height: auto;
     margin: 0;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 .shake {
     animation: shake 0.5s;
 }
+
 @keyframes shake {
-    0%   { transform: translateX(0); }
-    20%  { transform: translateX(-5px); }
-    40%  { transform: translateX(5px); }
-    60%  { transform: translateX(-5px); }
-    80%  { transform: translateX(5px); }
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
     100% { transform: translateX(0); }
 }
 
 
 /* === Modal Styling === */
 .modal-container {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -195,7 +203,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    display: none; 
+    display: none;
     z-index: 1000;
 }
 
@@ -205,33 +213,7 @@ body{
     width: 90vw;
     max-width: 1200px;
     height: 90vh;
-    color: #000; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    border: none;
-}
-.modal-content-yellow {
-    position: relative;
-    background-color: #FFFF66;
-    width: 90vw;
-    max-width: 1200px;
-    height: 90vh;
-    color: #000; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    border: none;
-}
-.modal-content-pink {
-    position: relative;
-    background-color: #FF69B4;
-    width: 90vw;
-    max-width: 1200px;
-    height: 90vh;
-    color: #000; 
+    color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -239,7 +221,34 @@ body{
     border: none;
 }
 
-/* Title */
+.modal-content-yellow {
+    position: relative;
+    background-color: #FFFF66;
+    width: 90vw;
+    max-width: 1200px;
+    height: 90vh;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    border: none;
+}
+
+.modal-content-pink {
+    position: relative;
+    background-color: #FF69B4;
+    width: 90vw;
+    max-width: 1200px;
+    height: 90vh;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    border: none;
+}
+
 .modal-title {
     font-size: clamp(2rem, 5vw, 4rem);
     margin-top: 2vh;
@@ -263,17 +272,20 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25vw; 
+    width: 25vw;
     max-width: 300px;
     z-index: 15;
-    position: absolute; 
+    position: absolute;
     top: 0;
     bottom: 0;
-    margin: auto; 
+    margin: auto;
     height: max-content;
 }
+
 #content-kelsey .item-box:nth-of-type(1) .tooltip-wrap::before{ left: auto; right: 100%;}
 #content-kelsey .item-box:nth-of-type(2) { right: 20%;}
+
+
 
 .tooltip-wrap {
     position: relative;
@@ -281,31 +293,34 @@ body{
     display: inline-block;
     width: 100%;
 }
+
 .tooltip-wrap::before {
-    content: attr(aria-label); 
+    content: attr(aria-label);
     position: absolute;
     top: 50%;
     left: 110%;
     transform: translateX(-50%) translateY(10px);
-    background-color: #2B222A; 
+    background-color: #2B222A;
     color: #efefef;
     padding: 1rem;
     border-radius: 8px;
-    width: 280px; 
+    width: 280px;
     font-size: 0.75rem;
     line-height: 1.4;
     text-align: left;
-    white-space: normal; 
+    white-space: normal;
     opacity: 0;
     pointer-events: none;
     transition: all 0.4s ease;
     z-index: 55;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
+
 .tooltip-wrap:hover::before{
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+
 .tooltip-wrap .draggable-work {
     position: relative;
     width: 100%;
@@ -317,13 +332,13 @@ body{
     width: 25vw;
     max-width: 400px;
     min-width: 180px;
-    z-index: 90; 
+    z-index: 90;
     position: relative;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     justify-content: center;
-    user-select: none;           
-    -webkit-user-drag: none;    
-    pointer-events: none;    
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
     cursor: default;
 }
 
@@ -331,21 +346,19 @@ body{
     position: absolute;
     width: 20vw;
     max-width: 250px;
-    z-index: 5;   
+    z-index: 5;
     cursor: grab;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 5px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);     
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     will-change: transform;
-
-    touch-action: none;         
-    -webkit-user-select: none;  
+    touch-action: none;
+    -webkit-user-select: none;
     user-select: none;
     -webkit-user-drag: none;
 }
-.draggable-work:active {
-    cursor: grabbing;
-}
+
+.draggable-work:active {cursor: grabbing;}
 .draggable-work[alt="dion-work-1"] { /* belt */
     width: 50vw;
     max-width: 380px;
@@ -353,18 +366,18 @@ body{
     margin-top: -5vh;
 }
 .draggable-work[alt="dion-work-2"] { /* brown */
-    margin-left: 15vw; 
+    margin-left: 15vw;
     margin-top: -3vh;
 }
 .draggable-work[alt="pugh-work-1"],
-.draggable-work[alt="pugh-work-2"] { 
-    width: 100%; 
+.draggable-work[alt="pugh-work-2"] {
+    width: 100%;
     max-width: 380px;
 }
 
 /* Biography Section */
 .modal-bio-section {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -373,6 +386,7 @@ body{
     margin: 0 auto;
     padding-bottom: 60px;
 }
+
 .bio-text {
     font-size: clamp(0.9rem, 2.1vw, 1.2rem);
     word-break: keep-all;
@@ -381,14 +395,12 @@ body{
     letter-spacing: -0.03em;
     line-height: 1.6;
 }
-.bio-text:first-of-type {
-    margin-top: 20px; 
-}
+.bio-text:first-of-type {margin-top: 20px;}
 
 /* close button */
 .close-modal {
     position: absolute;
-    top: 20px; 
+    top: 20px;
     right: 35px;
     font-size: 3rem;
     color: #000;
@@ -401,155 +413,177 @@ body{
 
 /* Media Query for Small Screens */
 @media screen and (max-width: 700px) {
-    body {
-        overflow: hidden;
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        margin: 0;
-    }
-    .poster-container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 20px;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
-    .title {
-        font-size: 1.4rem;
-        margin-top: 10px;
-        margin-bottom: 30px;
-        line-height: 1.2;
-        z-index: 20;
-    }
-    .folder-column {
-        flex-direction: column;
-        gap: 10px; 
-        justify-content: center;
-        flex: 1; 
-        z-index: 15;
-    }
-    .folder {
-        width: 130px;
-        height: 80px;
-    }
-    .label {
-        width: 180px;
-        font-size: 0.6rem; 
-        margin-top: 5px;
-    }
-    .icon-area {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: auto;
-    }
-    .file-card {
-        width: 55px; 
-        height: 55px;
-        pointer-events: auto;
-    }
-    .draggable-icon {
-        width: 45px;    
-        height: auto;
-    }
-    #card-porcupine { top: 15%; left: 5%; }
-    #card-blood { top: 25%; right: 8%; }
-    #card-skull { bottom: 20%; left: 10%; }
-    #card-camera { bottom: 10%; right: 12%; }
-    #card-belt { bottom: 5%; left: 40%; } 
-
-    .poster-container{
-        overflow-y: auto;
-    }
-
-
-    .tooltip-wrap::before, 
-    .draggable-work,
-    .item-box {
-        display: none;
-    }
-    .modal-content-blue, 
-    .modal-content-yellow, 
-    .modal-content-pink {
-        height: 100vh;          
-        padding: 10px 15px 0;          
-        justify-content: flex-start; 
-        overflow: hidden;      
-    }
-    .modal-title {
-        font-size: 1.8rem;       
-        margin-top: 25px;
-        margin-bottom: 10px;
-    }
-    .photo-container {
-        height: auto;
-        min-height: 220px;      
-        margin-top: 0;
-        margin-bottom: 5px;
-        display: flex;
-    }
-    .static-profile {
-        width: 270px;          
-        max-width: 55vw;
-        margin: 0 auto;
-        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-    }
-    .modal-bio-section {
-        padding: 0 5px;       
-        margin-top: 0;
-    }
-    .bio-text {
-        font-size: 0.85rem;      
-        line-height: 1.5;      
-        margin-bottom: 10px;   
-        text-align: justify;   
-        letter-spacing: -0.05em;
-    }
-    .close-modal {
-        top: 10px;
-        right: 10px;
-        font-size: 2rem;
-    }
-
-    .file-card, .draggable-icon, .draggable-work, .item-box {
-    touch-action: none !important;
-    -webkit-user-drag: none !important;
-    }
+body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    margin: 0;
 }
+
+.poster-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    line-height: 1.2;
+    z-index: 20;
+}
+
+.folder-column {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    flex: 1;
+    z-index: 15;
+}
+
+.folder {
+    width: 130px;
+    height: 80px;
+}
+
+.label {
+    width: 180px;
+    font-size: 0.6rem;
+    margin-top: 5px;
+}
+
+.icon-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+}
+
+.file-card {
+    width: 55px;
+    height: 55px;
+    pointer-events: auto;
+}
+
+.draggable-icon {
+    width: 45px;
+    height: auto;
+}
+
+#card-porcupine { top: 15%; left: 5%; }
+#card-blood { top: 25%; right: 8%; }
+#card-skull { bottom: 20%; left: 10%; }
+#card-camera { bottom: 10%; right: 12%; }
+#card-belt { bottom: 5%; left: 40%; }
+
+.tooltip-wrap::before,
+.draggable-work,
+.item-box {
+    display: none;
+}
+
+.modal-content-blue,
+.modal-content-yellow,
+.modal-content-pink {
+    height: 100vh;
+    padding: 10px 15px 0;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.photo-container {
+    height: auto;
+    min-height: 220px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.static-profile {
+    width: 270px;
+    max-width: 55vw;
+    margin: 0 auto;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.modal-bio-section {
+    padding: 0 5px;
+    margin-top: 0;
+}
+
+.bio-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    text-align: justify;
+    letter-spacing: -0.05em;
+}
+
+.close-modal {
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+}
+
+.file-card, .draggable-icon, .draggable-work, .item-box {
+    touch-action: none;
+    -webkit-user-drag: none;
+}
+
+}
+
+
 
 /* === Desktop Screen styling === */
-@media screen and (min-width: 1920px) {  
-    .title {
-        font-size: 3.5rem;      
-        margin-bottom: 60px;    
-    }
-    .folder-column {
-        gap: 10px;              
-    }
-    .folder-group {
-        margin-bottom: 50px;    
-    }
-    .folder {
-        width: 300px;           
-        height: 190px;          
-    }
-    .folder::before { 
-        width: 75px; 
-        height: 38px; 
-    }
-    .folder::after { 
-        left: 60px; 
-        width: 65px;
-        height: 38px;
-    }
-    .label {
-        width: 300px;           
-        font-size: 1.1rem;      
-        margin-top: 25px;       
-    }
+@media screen and (min-width: 2560px) {
+.title {
+    font-size: 3.5rem;
+    margin-bottom: 60px;
 }
+
+.folder-column {
+    gap: 10px;
+}
+
+    .folder-group {
+    margin-bottom: 50px;
+}
+
+.folder {
+    width: 300px;
+    height: 190px;
+}
+
+.folder::before {
+    width: 75px;
+    height: 38px;
+}
+
+.folder::after {
+    left: 60px;
+    width: 65px;
+    height: 38px;
+}
+
+.label {
+    width: 300px;
+    font-size: 1.1rem;
+    margin-top: 25px;
+}
+
+}
+
