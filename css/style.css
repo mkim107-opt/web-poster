@@ -543,12 +543,11 @@ body {
     touch-action: none;
     -webkit-user-drag: none;
 }
-
 }
 
 
 
-/* === Desktop Screen styling === */
+/*  Media Query for Large Screens */
 @media screen and (min-width: 2560px) {
 .title {
     font-size: 3.5rem;
@@ -585,5 +584,13 @@ body {
     margin-top: 25px;
 }
 
+.bio-text {
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    word-break: keep-all;
+    margin-top: 0;
+    margin-bottom: 15px;
+    letter-spacing: -0.04em;
+    line-height: 1.8;
+}
 }
 
